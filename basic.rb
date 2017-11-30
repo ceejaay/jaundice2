@@ -1,32 +1,28 @@
 require 'gosu'
 require_relative 'tile'
 require_relative 'player'
+require_relative 'map'
 
 class Basic < Gosu::Window
   def initialize
     super 600, 600
     self.caption = "Basic Gosu"
-    @monster = Player.new(120, 60)
-    puts @monster.x
-    puts @monster.y
-    @tiles = [ Tiles.new(90, 30), Tiles.new(30, 30), Tiles.new(30, 60), Tiles.new(30, 90), Tiles.new(60, 30)]
-    @obstacles = @tiles.dup
-    @obstacles << @monster
-    @player = Player.new(60, 60, false, @obstacles)
+    @map = Map.new("media/map2.txt")
+    @player = Player.new(30, 30, false, @map.tiles)
     @move_x = 0
   end
 
   def update
     close if button_down?(Gosu::KbEscape)
-    @player.move(@move_x)
+    #@player.move(@move_x)
     @move_x = 0
-    @player.update
+    #@player.update
   end
 
   def draw
    @player.draw
-   @tiles.each {|t| t.draw}
-   @monster.draw
+   @map.tiles.each {|t| t.draw}
+  # @monster.draw
   end
 
   def button_down(id)
