@@ -2,17 +2,17 @@ require 'gosu'
 require_relative 'tile'
 require_relative 'player'
 require_relative 'map'
+require_relative 'monster'
 
 class Basic < Gosu::Window
   def initialize
     super 600, 600
     self.caption = "Basic Gosu"
     @map = Map.new("media/map2.txt")
-    @actors =[]
+    @actors = Array.new 
+    @actors << Monster.new(60, 60)
     @move_x = 0
-    @actors << Player.new(30, 60)
-    @player = Player.new(30, 30, false, @map.tiles, @actors)
-    puts @player.monster
+    @player = Player.new(30, 30, @map.tiles, @actors)
     @message = Gosu::Font.new(15)
   end
 
@@ -26,7 +26,7 @@ class Basic < Gosu::Window
    @player.draw
    @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
-   @message.draw("#{@player.monster?(0, -30)}", 300, 30, 1)
+   #@message.draw("#{@player.monster?(0, -30)}", 300, 30, 1)
   # @monster.draw
   end
 

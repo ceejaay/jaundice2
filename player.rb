@@ -1,11 +1,10 @@
 class Player
-  attr_reader :x, :y, :monster, :tiles, :enemy_array
-  def initialize(x, y, monster=true, tiles=[], enemy_array=[])
+  attr_reader :x, :y, :tiles, :enemy_array
+  def initialize(x, y, tiles=[], enemy_array=[])
     @x = x
     @y = y
     @icon = Gosu::Font.new(30)
     @tiles = tiles
-    @monster = monster
     @enemy_array = enemy_array
   end
   def draw
@@ -68,7 +67,7 @@ class Player
 
   def monster?(offset_x, offset_y)
     @enemy_array.each do |enemy|
-      return true if (@x + offset_x)  / 30 == enemy.x / 30 and (@y + offset_y) / 30 == enemy.y / 30
+        return true if (@x + offset_x)  / 30 == enemy.x / 30 and (@y + offset_y) / 30 == enemy.y / 30
     end
     false
   end
