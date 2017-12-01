@@ -20,6 +20,7 @@ class Player
       @icon.draw("Solid down: #{solid?(0, 30)}", 330, 120, 1)
     end
   end
+
   def update
   end
 

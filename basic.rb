@@ -8,19 +8,22 @@ class Basic < Gosu::Window
     super 600, 600
     self.caption = "Basic Gosu"
     @map = Map.new("media/map2.txt")
-    @player = Player.new(30, 30, false, @map.tiles)
+    @obstacles = @map.tiles.dup
+    @actors =[]
+    @player = Player.new(30, 30, false, @obstacles)
     @move_x = 0
+    @actors << @player
+    @actors << Player.new(60, 30)
   end
 
   def update
     close if button_down?(Gosu::KbEscape)
-    #@player.move(@move_x)
+    @player.move(@move_x)
     @move_x = 0
-    #@player.update
   end
 
   def draw
-   @player.draw
+   @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
   # @monster.draw
   end
