@@ -1,23 +1,18 @@
 class Player
-  attr_reader :x, :y
-  def initialize(x, y, monster=true, tiles=[])
+  attr_reader :x, :y, :monster, :tiles, :enemy_array
+  def initialize(x, y, monster=true, tiles=[], enemy_array=[])
     @x = x
     @y = y
     @icon = Gosu::Font.new(30)
     @tiles = tiles
     @monster = monster
+    @enemy_array = enemy_array
   end
   def draw
     if @monster
       @icon.draw("A", @x, @y, 1)
     else
       @icon.draw("@", @x, @y, 1)
-    end
-    if ! @monster
-      @icon.draw("Solid right: #{solid?(30, 0)}", 330, 30, 1)
-      @icon.draw("Solid left: #{solid?(-30, 0)}", 330, 60, 1)
-      @icon.draw("Solid up: #{solid?(0, -30)}", 330, 90, 1)
-      @icon.draw("Solid down: #{solid?(0, 30)}", 330, 120, 1)
     end
   end
 
@@ -72,10 +67,8 @@ class Player
   end
 
   def monster?(offset_x, offset_y)
-    @tiles.each do |tile|
-      if tile.class == Player
-        return true if (@x + offset_x)  / 30 == tile.x / 30 and (@y + offset_y) / 30 == tile.y / 30
-      end
+    @enemy_array.each do |enemy|
+      return true if (@x + offset_x)  / 30 == enemy.x / 30 and (@y + offset_y) / 30 == enemy.y / 30
     end
     false
   end
