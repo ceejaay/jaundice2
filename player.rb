@@ -21,36 +21,36 @@ class Player
   def move(direction)
     if direction == :right
       if solid?(30, 0)
-        if monster?(30, 0)
-          attack
-        end
+        @x += 0
+      elsif monster?(30, 0)
+        attack
       else
         @x += 30
       end
     end
     if direction == :left
       if solid?(-30, 0)
-        if monster?(-30, 0)
+        @x -= 0
+      elsif monster?(-30, 0)
           attack
-        end
       else
         @x -= 30
       end
     end
     if direction == :up
       if solid?(0, -30)
-        if monster?(0, -30)
-          attack
-        end
+        @y -= 0
+      elsif monster?(0, -30)
+        attack
       else
         @y -= 30
       end
     end
     if direction == :down
       if solid?(0, 30)
-        if monster?(0, 30)
+        @y += 0
+      elsif monster?(0, 30)
           attack
-        end
       else
         @y += 30
       end
@@ -60,7 +60,6 @@ class Player
   def solid?(offset_x, offset_y)
     @tiles.each do |tile|
       return true if (@x + offset_x)  / 30 == tile.x / 30 and (@y + offset_y) / 30 == tile.y / 30
-      #puts "Offset: #{@x + offset_x}, X: #{@x}"
     end
     false
   end

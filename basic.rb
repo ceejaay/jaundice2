@@ -26,26 +26,20 @@ class Basic < Gosu::Window
    @player.draw
    @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
-   #@message.draw("#{@player.monster?(0, -30)}", 300, 30, 1)
-  # @monster.draw
   end
 
   def button_down(id)
     if id == Gosu::KbRight
       @move_x = :right
-      puts @player.monster?(30, 0)
     end
     if id == Gosu::KbLeft
       @move_x = :left
-      puts @player.monster?(-30, 0)
     end
     if id == Gosu::KbUp
       @move_x = :up
-      puts @player.monster?(0, -30)
     end
     if id == Gosu::KbDown
       @move_x = :down
-      puts @player.monster?(0, 30)
     end
   end
 end
