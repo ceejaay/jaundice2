@@ -58,8 +58,11 @@ class Player
   end
 
   def solid?(offset_x, offset_y)
+
     @tiles.each do |tile|
-      return true if (@x + offset_x)  / 30 == tile.x / 30 and (@y + offset_y) / 30 == tile.y / 30
+      if (@x + offset_x)  / 30 == tile.x / 30 and (@y + offset_y) / 30 == tile.y / 30
+        return true unless tile.type == :key or tile.type == :exit
+      end
     end
     false
   end

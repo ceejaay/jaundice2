@@ -7,18 +7,18 @@ class Map
     @tiles = []
     create_tiles
   end
-   
+
   def create_tiles
     @height.times do |y|
       @width.times do |x|
         tile = @lines
         case @lines[y][x]
           when "#"
-            @tiles << Tiles.new(x * 30, y * 30)
-          #when "K"
-          #  @tiles << Tile.new(x * 30, y * 30)
-          #when "E"
-          #  @tiles << Tile.new(x * 30, y * 30)
+            @tiles << Tiles.new(x * 30, y * 30, :wall)
+          when "K"
+            @tiles << Tiles.new(x * 30, y * 30, :key)
+          when "E"
+            @tiles << Tiles.new(x * 30, y * 30, :exit)
          end
       end
     end
