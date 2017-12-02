@@ -19,6 +19,7 @@ class Basic < Gosu::Window
 
   def update
     close if button_down?(Gosu::KbEscape)
+    @player.update
     @player.move(@move_x)
     @move_x = 0
   end
