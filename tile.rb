@@ -11,7 +11,12 @@ class Tiles
   def draw
     case @type
       when :wall
-        @graphic[0].draw(@x, @y, 1)
+        if @visible
+          @graphic[0].draw(@x, @y, 1)
+        elsif @hazy
+          @graphic[2].draw(@x, @y, 1)
+        else
+        end
       when :exit
         @graphic[0].draw(@x, @y, 1)
       when :key
@@ -19,4 +24,17 @@ class Tiles
     end
   end
 
+  def visibility(status)
+    if status == :visible
+      @visible = true
+    end
+    if status == :hazy
+      @visible = false
+      @hazy = true
+    end
+    if status == :invisible
+      @visible = false
+      @hazy = false
+    end
+  end
 end
