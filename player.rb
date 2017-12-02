@@ -12,7 +12,7 @@ class Player
     if @monster
       @icon.draw("A", @x, @y, 1)
     else
-      @graphic[6].draw(@x, @y, 1)
+      @graphic[6].draw(@x, @y, 100)
     end
   end
 

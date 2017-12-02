@@ -13,9 +13,9 @@ class Tiles
       when :wall
         @graphic[0].draw(@x, @y, 1)
       when :exit
-        @graphic[0].draw(@x, @y, 1)
+        @graphic[1].draw(@x, @y, 1)
       when :key
-        @graphic[0].draw(@x, @y, 1)
+        @graphic[3].draw(@x, @y, 1)
     end
   end
 
