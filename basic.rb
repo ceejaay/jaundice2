@@ -8,11 +8,12 @@ class Basic < Gosu::Window
   def initialize
     super 600, 600
     self.caption = "Basic Gosu"
-    @map = Map.new("media/map2.txt")
+    @graphics = Gosu::Image.load_tiles("media/map_tile.png", 30, 30)
+    @map = Map.new("media/map2.txt", @graphic)
     @actors = Array.new 
-    @actors << Monster.new(60, 60)
+    @actors << Monster.new(60, 60, @graphics)
     @move_x = 0
-    @player = Player.new(30, 30, @map.tiles, @actors)
+    @player = Player.new(30, 30, @graphics, @map.tiles, @actors)
     @message = Gosu::Font.new(15)
   end
 

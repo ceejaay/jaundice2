@@ -1,10 +1,11 @@
 class Map
   attr_reader :tiles
-  def initialize(file)
+  def initialize(file, graphic)
     @lines = File.readlines(file).map {|line| line.chomp}
     @width = @lines[0].length
     @height = @lines.length
     @tiles = []
+    @graphic = graphic
     create_tiles
   end
 
@@ -14,11 +15,11 @@ class Map
         tile = @lines
         case @lines[y][x]
           when "#"
-            @tiles << Tiles.new(x * 30, y * 30, :wall)
+            @tiles << Tiles.new(x * 30, y * 30, :wall, @graphic)
           when "K"
-            @tiles << Tiles.new(x * 30, y * 30, :key)
+            @tiles << Tiles.new(x * 30, y * 30, :key, @graphic)
           when "E"
-            @tiles << Tiles.new(x * 30, y * 30, :exit)
+            @tiles << Tiles.new(x * 30, y * 30, :exit, @graphic)
          end
       end
     end

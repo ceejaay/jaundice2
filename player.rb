@@ -1,8 +1,9 @@
 class Player
   attr_reader :x, :y, :tiles, :enemy_array
-  def initialize(x, y, tiles=[], enemy_array=[])
+  def initialize(x, y, graphic, tiles=[], enemy_array=[])
     @x = x
     @y = y
+    @graphic = graphic
     @icon = Gosu::Font.new(30)
     @tiles = tiles
     @enemy_array = enemy_array
@@ -11,7 +12,7 @@ class Player
     if @monster
       @icon.draw("A", @x, @y, 1)
     else
-      @icon.draw("@", @x, @y, 1)
+      @graphic[6].draw(@x, @y, 1)
     end
   end
 
