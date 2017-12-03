@@ -18,9 +18,17 @@ class Tiles
         else
         end
       when :exit
-        @graphic[1].draw(@x, @y, 1)
+        if @hazy
+          @graphic[1].draw(@x, @y, 1)
+        elsif @visible
+          @graphic[5].draw(@x, @y, 1)
+        end
       when :key
-        @graphic[3].draw(@x, @y, 1)
+        if @hazy
+          @graphic[4].draw(@x, @y, 1)
+        elsif @visible
+          @graphic[3].draw(@x, @y, 1)
+        end
     end
   end
 

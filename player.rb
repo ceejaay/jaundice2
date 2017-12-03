@@ -19,6 +19,7 @@ class Player
   def update
     @tiles.each do |tile|
       tile.visibility(distance_from_player(tile.x, tile.y))
+      puts tile.type
     end
   end
 
@@ -79,7 +80,7 @@ class Player
 
   def distance_from_player(x, y)
     distance = Gosu.distance(@x, @y, x, y)
-    if (30..90).include?(distance)
+   if (30..90).include?(distance)
       #make the thing visible
       return :visible
     end
