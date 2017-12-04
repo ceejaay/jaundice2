@@ -19,7 +19,9 @@ class Player
   def update
     @tiles.each do |tile|
       tile.visibility(distance_from_player(tile.x, tile.y))
-      puts tile.type
+    end
+    @enemy_array.each do |enemy|
+      enemy.visibility(distance_from_player(enemy.x, enemy.y))
     end
   end
 
@@ -79,19 +81,7 @@ class Player
   end
 
   def distance_from_player(x, y)
-    distance = Gosu.distance(@x, @y, x, y)
-   if (30..90).include?(distance)
-      #make the thing visible
-      return :visible
-    end
-    if (90..150).include?(distance)
-      #make the thing hazy
-      return :hazy
-    end
-    if distance > 150
-      #make the thing invisible
-      return :invisible
-    end
+    return Gosu.distance(@x, @y, x, y)
   end
 
   def attack

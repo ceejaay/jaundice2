@@ -13,9 +13,8 @@ class Tiles
       when :wall
         if @visible
           @graphic[0].draw(@x, @y, 1)
-        elsif @hazy
+        elsif @visible == false  and @hazy == true
           @graphic[2].draw(@x, @y, 1)
-        else
         end
       when :exit
         if @hazy
@@ -29,20 +28,16 @@ class Tiles
         elsif @visible
           @graphic[3].draw(@x, @y, 1)
         end
-    end
+      end
   end
 
-  def visibility(status)
-    if status == :visible
-      @visible = true
-    end
-    if status == :hazy
-      @visible = false
-      @hazy = true
-    end
-    if status == :invisible
-      @visible = false
-      @hazy = false
-    end
+  def visibility(distance)
+      if (30..60).include?(distance)
+        @visible = true
+        @hazy = false
+      elsif (60..90).include?(distance)
+        @visible = false
+        @hazy = true
+      end
   end
 end
