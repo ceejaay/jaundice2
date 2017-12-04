@@ -3,6 +3,7 @@ require_relative 'tile'
 require_relative 'player'
 require_relative 'map'
 require_relative 'monster'
+require_relative 'hud'
 
 class Basic < Gosu::Window
   def initialize
@@ -15,6 +16,7 @@ class Basic < Gosu::Window
     @move_x = 0
     @player = Player.new(30, 30, @graphics, @map.tiles, @actors)
     @message = Gosu::Font.new(15)
+    @hud = Hud.new(self, @graphics)
   end
 
   def update
@@ -28,6 +30,7 @@ class Basic < Gosu::Window
    @player.draw
    @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
+   @hud.draw
   end
 
   def button_down(id)
