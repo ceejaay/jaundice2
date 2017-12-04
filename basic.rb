@@ -46,6 +46,9 @@ class Basic < Gosu::Window
     if id == Gosu::KbDown
       @move_x = :down
     end
+    if id == Gosu::KbI
+      @hud.menu
+    end
   end
 end
 
