@@ -16,7 +16,8 @@ class Basic < Gosu::Window
     @move_x = 0
     @player = Player.new(30, 30, @graphics, @map.tiles, @actors)
     @message = Gosu::Font.new(15)
-    @hud = Hud.new(self, @graphics)
+    @hud = Hud.new(self, @graphics, @player)
+    @turn = 0
   end
 
   def update
@@ -31,23 +32,33 @@ class Basic < Gosu::Window
    @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
    @hud.draw
+   @message.draw("#{@turn}", 400, 30, 1)
   end
 
   def button_down(id)
     if id == Gosu::KbRight
       @move_x = :right
+      @turn += 1
     end
     if id == Gosu::KbLeft
       @move_x = :left
+      @turn += 1
     end
     if id == Gosu::KbUp
       @move_x = :up
+      @turn += 1
     end
     if id == Gosu::KbDown
       @move_x = :down
+      @turn += 1
     end
     if id == Gosu::KbI
       @hud.menu
+    end
+
+    if id == Gosu::KbW
+      puts "waiting"
+      @turn += 1
     end
   end
 end

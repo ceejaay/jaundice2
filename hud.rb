@@ -1,6 +1,6 @@
 class Hud
   attr_reader :menu
-  def initialize(window, graphic)
+  def initialize(window, graphic, player)
     @window = window
     @menu = false
     @width = @window.width
@@ -8,6 +8,7 @@ class Hud
     @graphic = graphic
     @text = Gosu::Font.new(30)
     @messages = Gosu::Font.new(20)
+    @player = player
 # an image to be a frame.
 #@frame = Gous::Image.new("media/frame.png")
     #@selector_dot = Gosu::Image.new("media/dot.png")
@@ -35,8 +36,8 @@ class Hud
 # text info
       @text.draw("Health", 420, 500, 99 )
       @text.draw("MELD", 420, 530, 99 )
-      @text.draw("40", 530, 530, 99 )
-      @text.draw("90", 530, 500, 99 )
+      @text.draw("#{@player.meld}", 530, 530, 99 )
+      @text.draw("#{@player.health}", 530, 500, 99 )
       @messages.draw("We'll write messages here", 120, 500, 99 )
       @messages.draw("so we'll know what's going on.", 120, 530, 99 )
     end
