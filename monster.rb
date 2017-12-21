@@ -7,6 +7,15 @@ class Monster
     @icon = Gosu::Font.new(30)
     @visible = false
     @hazy = false
+    @turn = false
+  end
+
+  def turn_change
+    if @turn
+      @turn = false
+      else
+        @turn = true
+      end
   end
 
   def draw

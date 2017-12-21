@@ -18,6 +18,8 @@ class Basic < Gosu::Window
     @message = Gosu::Font.new(15)
     @hud = Hud.new(self, @graphics, @player)
     @turn = 0
+    @queue = @actors.dup
+    @queue << @player
   end
 
   def update

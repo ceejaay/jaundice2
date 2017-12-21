@@ -9,6 +9,7 @@ class Player
     @enemy_array = enemy_array
     @meld = 19
     @health = 75
+    @turn = true
   end
   def draw
     @graphic[6].draw(@x, @y, 100)
@@ -24,42 +25,64 @@ class Player
   end
 
   def move(direction)
-    if direction == :right
-      if solid?(30, 0)
-        @x += 0
-      elsif monster?(30, 0)
-        attack
-      else
-        @x += 30
-      end
-    end
-    if direction == :left
-      if solid?(-30, 0)
-        @x -= 0
-      elsif monster?(-30, 0)
+    if @turn
+      if direction == :right
+        if solid?(30, 0)
+          @x += 0
+          turn_change
+        elsif monster?(30, 0)
           attack
-      else
-        @x -= 30
+          turn_change
+        else
+          @x += 30
+          turn_change
+        end
       end
-    end
-    if direction == :up
-      if solid?(0, -30)
-        @y -= 0
-      elsif monster?(0, -30)
-        attack
-      else
-        @y -= 30
+      if direction == :left
+        if solid?(-30, 0)
+          @x -= 0
+          turn_change
+        elsif monster?(-30, 0)
+            attack
+            turn_change
+        else
+          @x -= 30
+          turn_change
+        end
       end
-    end
-    if direction == :down
-      if solid?(0, 30)
-        @y += 0
-      elsif monster?(0, 30)
+      if direction == :up
+        if solid?(0, -30)
+          @y -= 0
+          turn_change
+        elsif monster?(0, -30)
           attack
-      else
-        @y += 30
+          turn_change
+        else
+          @y -= 30
+          turn_change
+        end
+      end
+      if direction == :down
+        if solid?(0, 30)
+          @y += 0
+          turn_change
+        elsif monster?(0, 30)
+            attack
+          turn_change
+        else
+          @y += 30
+          turn_change
+        end
       end
     end
+  end
+
+  def turn_change
+    if @turn
+      @turn = false
+    else
+      @turn = true
+      end
   end
 
   def solid?(offset_x, offset_y)
