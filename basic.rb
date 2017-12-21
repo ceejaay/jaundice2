@@ -15,19 +15,30 @@ class Basic < Gosu::Window
     @actors << Monster.new(60, 60, @graphics)
     @move_x = 0
     @player = Player.new(30, 30, @graphics, @map.tiles, @actors)
+    @actors << @player
     @message = Gosu::Font.new(15)
     @hud = Hud.new(self, @graphics, @player)
-    @turn = 0
-    @queue = @actors.dup
-    @queue << @player
+    @turn_number = 0
   end
 
   def update
     close if button_down?(Gosu::KbEscape)
     @player.update
-    @player.move(@move_x)
-    @move_x = 0
-    @player.stat_adjustment(@turn)
+    if @player.turn
+      @player.move(@move_x)
+      @player.turn_change
+      @actors[0].turn_change
+      @actors.rotate!
+      @player.stat_adjustment(@turn_number)
+      @move_x = 0
+    end
+    @player.stat_adjustment(@turn_number)
+    if @actors[0].class == Monster and @actors[0].turn
+      @actors[0].auto_move
+      @actors[0].turn_change
+      @actors.rotate!
+      @actors[0].turn_change
+    end
   end
 
   def draw
@@ -35,25 +46,29 @@ class Basic < Gosu::Window
    @actors.each {|a| a.draw}
    @map.tiles.each {|t| t.draw}
    @hud.draw
-   @message.draw("#{@turn}", 400, 30, 1)
+   @message.draw("#{@turn_number}", 400, 30, 1)
   end
 
   def button_down(id)
     if id == Gosu::KbRight
       @move_x = :right
-      @turn += 1
+      @player.turn_change
+      @turn_number += 1
     end
     if id == Gosu::KbLeft
       @move_x = :left
-      @turn += 1
+      @player.turn_change
+      @turn_number += 1
     end
     if id == Gosu::KbUp
       @move_x = :up
-      @turn += 1
+      @player.turn_change
+      @turn_number += 1
     end
     if id == Gosu::KbDown
       @move_x = :down
-      @turn += 1
+      @player.turn_change
+      @turn_number += 1
     end
     if id == Gosu::KbI
       @hud.menu
@@ -61,7 +76,8 @@ class Basic < Gosu::Window
 
     if id == Gosu::KbW
       puts "waiting"
-      @turn += 1
+      @player.turn_change
+      @turn_number += 1
     end
   end
 end

@@ -1,5 +1,5 @@
 class Monster
-  attr_reader :x, :y
+  attr_reader :x, :y, :turn
   def initialize(x, y, graphic)
     @x = x
     @y = y
@@ -8,6 +8,10 @@ class Monster
     @visible = false
     @hazy = false
     @turn = false
+  end
+
+  def auto_move
+    puts "My turn!!"
   end
 
   def turn_change

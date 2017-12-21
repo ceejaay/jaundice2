@@ -1,5 +1,5 @@
 class Player
-  attr_reader :x, :y, :tiles, :enemy_array, :meld, :health
+  attr_reader :x, :y, :tiles, :enemy_array, :meld, :health, :turn
   def initialize(x, y, graphic, tiles=[], enemy_array=[])
     @x = x
     @y = y
@@ -10,6 +10,7 @@ class Player
     @meld = 19
     @health = 75
     @turn = true
+    @visibility = true
   end
   def draw
     @graphic[6].draw(@x, @y, 100)
@@ -20,7 +21,10 @@ class Player
       tile.visibility(distance_from_player(tile.x, tile.y))
     end
     @enemy_array.each do |enemy|
-      enemy.visibility(distance_from_player(enemy.x, enemy.y))
+      #check for monster because all monsters and player are in one array in the main game file
+      if enemy.class == Monster
+        enemy.visibility(distance_from_player(enemy.x, enemy.y))
+      end
     end
   end
 
@@ -67,7 +71,7 @@ class Player
           @y += 0
           turn_change
         elsif monster?(0, 30)
-            attack
+          attack
           turn_change
         else
           @y += 30
