@@ -25,6 +25,7 @@ class Basic < Gosu::Window
     @player.update
     @player.move(@move_x)
     @move_x = 0
+    @player.stat_adjustment(@turn)
   end
 
   def draw

@@ -11,11 +11,7 @@ class Player
     @health = 75
   end
   def draw
-    if @monster
-      @icon.draw("A", @x, @y, 1)
-    else
-      @graphic[6].draw(@x, @y, 100)
-    end
+    @graphic[6].draw(@x, @y, 100)
   end
 
   def update
@@ -88,5 +84,12 @@ class Player
 
   def attack
     puts "Attacking!"
+  end
+
+  def stat_adjustment(turn)
+    current_turn = turn
+    if current_turn % 10 == 0 and current_turn != 0
+      @health -= 1
+      end
   end
 end
